@@ -1,5 +1,5 @@
 Here are some simple instructions for setting up a Debian/Ubuntu based OpenNMS install using the repos, along side Grafana, Syslog-NG, and postgresql10.
-Have a great OpenNMS dev experience with these notebooks, in a hurry. Do not block copy/paste multiple lines of commands.
+Have a great OpenNMS dev experience with these notebooks, in a hurry.
 
 0) Install Ubuntu Server 18.04 LTS. Command line only. NO GUI. You don't need it, unless you are going to access the web GUI on the same machine you are installing it on.
 
