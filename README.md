@@ -1,3 +1,5 @@
+NOTE:  Please copy/paste from raw text. The autoformatting is really annoying.
+
 Here are some simple instructions for setting up a Debian/Ubuntu based OpenNMS install using the repos, along side Grafana, Syslog-NG, and postgresql10.
 Have a great OpenNMS dev experience with these notebooks, in a hurry.
 
