@@ -160,24 +160,11 @@ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 29) And finally, place ALL opennms package upgrades on HOLD. This is important, because once you start altering the default install in ANY way, the automated repo upgrades will break your installation.
 Here is commands for that. If some of the services are a little different, you can look to see what you are missing, but this next command should get it.
 
-sudo apt-mark hold opennms \ opennms-db \ opennms-server \
-	opennms-webapp-jetty \
-	opennms-contrib \
-	opennms-server \
-	opennms-plugin-* \
-	opennms-source \
-	libopennms-java \
-    	libopennmsdeps-java \
-    	opennms-common \
-	opennms-webapp-hawtio \
-	opennms-webapp-remoting \
-	opennms-alec-plugin \
-	opennms-jmx-config-generator \
-	opennms-plugins \
-	opennms-doc
+sudo apt-mark hold opennms \ opennms-db \ opennms-server \ opennms-webapp-jetty \ opennms-contrib \ opennms-server \ opennms-plugin-* \ opennms-source \ libopennms-java \ libopennmsdeps-java \ opennms-common \ opennms-webapp-hawtio \ opennms-webapp-remoting \ opennms-alec-plugin \ opennms-jmx-config-generator \ opennms-plugins \ opennms-doc
 
 30) If the above command freaks out saying it can't find something, then remove that line from the command, re-paste and run, we can look for any new services and hold them next.
 Whatever output this next command spits out, you'll be able to see which packages you haven't marked for hold status.
+
 sudo apt-cache search opennms
 
 31) In closing, if you made it this far, then you are ready for the bigger stuff in the following notebooks on my github. Good luck and have fun with OpenNMS Horizon. I am.
