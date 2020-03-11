@@ -41,7 +41,7 @@ sudo reboot
 
 10) Install opennms thru repos using this convenient script. Login to rebooted system. Commands below. Follow all instructions and Document EVERYTHING. Defaults are fine.-> 
 
-git clone git clone https://github.com/opennms-forge/opennms-install/
+git clone https://github.com/opennms-forge/opennms-install/
 
 cd opennms-install
 
