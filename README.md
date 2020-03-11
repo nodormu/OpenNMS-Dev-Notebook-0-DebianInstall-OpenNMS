@@ -7,7 +7,7 @@ Have a great OpenNMS dev experience with these notebooks, in a hurry.
 
 sudo apt-get purge ufw* -y
 
-2) Install syslog repo for latest greatest syslog-ng repo. See commands->
+2) Install syslog repo for latest greatest syslog-ng repo. See command->
 
 wget -qO - http://download.opensuse.org/repositories/home:/laszlo_budai:/syslog-ng/xUbuntu_18.04/Release.key | sudo apt-key add -
 
