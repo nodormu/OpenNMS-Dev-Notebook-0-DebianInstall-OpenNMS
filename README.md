@@ -3,34 +3,34 @@ Have a great OpenNMS dev experience with these notebooks, in a hurry.
 
 0) Install Ubuntu Server 18.04 LTS. Command line only. NO GUI. You don't need it, unless you are going to access the web GUI on the same machine you are installing it on.
 
-1) Use IP tables. Don't use ufw, as we are setting up iptables-persistent in a later step. See commands below
+1) Use IP tables. Don't use ufw, as we are setting up iptables-persistent in a later step. See commands->
 sudo apt-get purge ufw* -y
 
-2) Install syslog repo for latest greatest syslog-ng repo. See commands below.
+2) Install syslog repo for latest greatest syslog-ng repo. See commands->
 wget -qO - http://download.opensuse.org/repositories/home:/laszlo_budai:/syslog-ng/xUbuntu_18.04/Release.key | sudo apt-key add -
 
-3) Create a file in the following directory.
+3) Create a file in the following directory-> 
 sudo nano /etc/apt/sources.list.d/syslog-ng-obs.list
 
-4) Add this to the file and save it.
+4) Add this to the file and save it-> 
 deb http://download.opensuse.org/repositories/home:/laszlo_budai:/syslog-ng/xUbuntu_18.04 ./
 
-5) Run update/upgrade. If syslog is installed, it will update.
+5) Run update/upgrade. If syslog is installed, it will update-> 
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y
 
-6) If syslog-ng is not installed, install it.
+6) If syslog-ng is not installed, install it-> 
 sudo apt-get install syslog-ng* -y
 
-7) Install dependencies: (Defaults are fine. If some of these are outdated, then remove those from line, paste edited command and run again.)
+7) Install dependencies: (Defaults are fine. If some of these are outdated, then remove those from line, paste edited command and run again.)-> 
 sudo apt-get install iptables iptables-dev netfilter-persistent iptables-persistent smitools unzip clamav lm-sensors unzip snmp net-tools snmpd cmdtest golang libsnmp-dev apt-transport-* libdbi1 libdbd-mysql r-recommended devscripts dpkg-sig expect nsis babel-core* snmptrapd snmp-mibs-downloader rrdtool osm2pgsql php-bcmath nmap* clamav* rkhunter openjdk-11-* openjdk-11-jdk liboce-* libxext-doc -y moreutils -y default-jre* -y x509-util -y vnstat -y traceroute -y dom4j* -y java-se* -y xerces* -y zookeeper -y scala-library* -y libosgi-core-* libosgi-foundation-ee-java -y dnsutils -y bind9-host -y libdns* -y
 
-8) Install more dependencies:  (If some of these are outdated, then remove those from line, paste edited command and run again. This is split up to avoid conflicts.)
+8) Install more dependencies:  (If some of these are outdated, then remove those from line, paste edited command and run again. This is split up to avoid conflicts.)-> 
 sudo apt-get install libcurl4-openssl-dev -y libcurl4-gnutls-dev -y libcurl4-nss-dev -y update-alternatives* -y git* -y
 
-9) Reboot computer:
+9) Reboot computer-> 
 sudo reboot
 
-10) Install opennms thru repos using this convenient script. Login to rebooted system. Commands below. Follow all instructions and Document EVERYTHING. Defaults are fine.
+10) Install opennms thru repos using this convenient script. Login to rebooted system. Commands below. Follow all instructions and Document EVERYTHING. Defaults are fine.-> 
 git clone git clone https://github.com/opennms-forge/opennms-install/
 cd opennms-install
 sudo chmod +x bootstrap-debian.sh
