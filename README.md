@@ -4,6 +4,7 @@ Have a great OpenNMS dev experience with these notebooks, in a hurry.
 0) Install Ubuntu Server 18.04 LTS. Command line only. NO GUI. You don't need it, unless you are going to access the web GUI on the same machine you are installing it on.
 
 1) Use IP tables. Don't use ufw, as we are setting up iptables-persistent in a later step. See commands->
+
 sudo apt-get purge ufw* -y
 
 2) Install syslog repo for latest greatest syslog-ng repo. See commands->
