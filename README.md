@@ -142,7 +142,7 @@ java -version
 
 which java
 
-ls -lash `which java`
+"ls -lash `which java`"  (I had to put this command in double quotes because of how the text editor auto formats backticks)
 
 sudo update-alternatives --config java
 
