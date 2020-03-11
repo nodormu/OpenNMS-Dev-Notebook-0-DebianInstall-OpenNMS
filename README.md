@@ -160,9 +160,7 @@ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 29) And finally, place ALL opennms package upgrades on HOLD. This is important, because once you start altering the default install in ANY way, the automated repo upgrades will break your installation.
 Here is commands for that. If some of the services are a little different, you can look to see what you are missing, but this next command should get it.
 
-sudo apt-mark hold opennms \
-	opennms-db \
-	opennms-server \
+sudo apt-mark hold opennms \ opennms-db \ opennms-server \
 	opennms-webapp-jetty \
 	opennms-contrib \
 	opennms-server \
