@@ -97,11 +97,13 @@ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -
 
 sudo apt-get install grafana* snmp snmpd snmptrapd snmp-mibs-downloader rrdtool
 
-18) Start grafana and enable on boot. Then check GUI in a web browser. Here is URL:  http://Type IP address of server here instead of string:3000
+18) Start grafana server, enable for boot, then check GUI in a web browser. Here is URL:  
 
 sudo systemctl start grafana-server
 
 sudo systemctl enable grafana-server
+
+http://Type IP address of server here instead of string:3000
 
 19) Go back to command line. Install more dependencies.
 
