@@ -9,6 +9,7 @@ sudo apt-get purge ufw* -y
 
 2) Install syslog repo for latest greatest syslog-ng repo. See command below.
 If you don't use Ubuntu, then go to the URL in the wget and find the path for your version of linux.
+Also don't forget the space and the - at the end of add. The text trails off the view.
 
 wget -qO - http://download.opensuse.org/repositories/home:/laszlo_budai:/syslog-ng/xUbuntu_18.04/Release.key | sudo apt-key add -
 
@@ -198,7 +199,9 @@ sudo apt-get purge tor*
 -A INPUT -s 127.0.0.1/32 -p udp -m udp --dport 10514 -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 
-32) You will also want to set a rule allow ssh so you can remote into the server, otherwise you'll kill your access beyond the webGUI. Use this command to find out the name of your interface and the network your server is on:  
+32) You will also want to set a rule allow ssh so you can remote into the server, 
+otherwise you'll kill your access beyond the webGUI. 
+Use this command to find out the name of your interface and the network your server is on:  
 
 ifconfig -a
 
@@ -235,7 +238,8 @@ tcpkill host 192.168.1.2
 
 If you see suspicious traffic from a public IP, then tcpkill it.
 
-35) In closing, if you made it this far, then you are ready for the bigger stuff in the following notebooks on my github. 
+35) In closing, if you made it this far, then you are ready for the bigger stuff 
+in the following notebooks on my github. 
 Good luck and have fun with OpenNMS Horizon. I am.
 
 
