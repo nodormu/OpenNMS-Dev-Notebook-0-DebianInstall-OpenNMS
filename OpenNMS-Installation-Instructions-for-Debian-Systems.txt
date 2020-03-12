@@ -1,4 +1,5 @@
-Here are some simple instructions for setting up a Debian/Ubuntu based OpenNMS install using the repos, along side Grafana, Syslog-NG, and postgresql10.
+Here are some simple instructions for setting up a Debian/Ubuntu based OpenNMS install using the repos, along side Grafana, 
+Syslog-NG, and postgresql10.
 Have a great OpenNMS dev experience with these notebooks, in a hurry. Do not block copy/paste multiple lines of commands.
 
 0) Install Ubuntu Server 18.04 LTS. Command line only. NO GUI. You don't need it, unless you are going to access the web GUI on the same machine you are installing it on.
@@ -21,43 +22,55 @@ sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y &
 6) If syslog-ng is not installed, install it.
 sudo apt-get install syslog-ng* -y
 
-7) Install dependencies: (Defaults are fine. If some of these are outdated, then remove those from line, paste edited command and run again.)
+7) Install dependencies: (Defaults are fine. If some of these are outdated, then remove those from line, 
+paste edited command and run again.)
+
 sudo apt-get install iptables iptables-dev netfilter-persistent iptables-persistent smitools unzip clamav lm-sensors unzip snmp net-tools snmpd cmdtest golang libsnmp-dev apt-transport-* libdbi1 libdbd-mysql r-recommended devscripts dpkg-sig expect nsis babel-core* snmptrapd snmp-mibs-downloader rrdtool osm2pgsql php-bcmath nmap* clamav* rkhunter openjdk-11-* openjdk-11-jdk liboce-* libxext-doc -y moreutils -y default-jre* -y x509-util -y vnstat -y traceroute -y dom4j* -y java-se* -y xerces* -y zookeeper -y scala-library* -y libosgi-core-* libosgi-foundation-ee-java -y dnsutils -y bind9-host -y libdns* -y
 
 8) Install more dependencies:  (If some of these are outdated, then remove those from line, paste edited command and run again. This is split up to avoid conflicts.)
+
 sudo apt-get install libcurl4-openssl-dev -y libcurl4-gnutls-dev -y libcurl4-nss-dev -y update-alternatives* -y git* -y
 
 9) Reboot computer:
 sudo reboot
 
 10) Install opennms thru repos using this convenient script. Login to rebooted system. Commands below. Follow all instructions and Document EVERYTHING. Defaults are fine.
+
 git clone git clone https://github.com/opennms-forge/opennms-install/
 cd opennms-install
 sudo chmod +x bootstrap-debian.sh
 sudo bash ./bootstrap-debian.sh
 
 11) Once install is complete run these commands.
+
 sudo apt-get install jrrd* -y
 sudo /usr/share/opennms/bin
 sudo ./install -dis
 
 12) start and enable postgresql for boot
+
 sudo systemctl start postgresql
 sudo systemctl enable postgresql
 
 13) Update and start OpenNMS
+
 cd /usr/share/opennms/bin
 sudo ./upgrade
 sudo systemctl start opennms
 sudo systemctl enable opennms
 
 14) Wait a while, make sure everything is at status `running` by running this command.
+
 sudo opennms -v status
 
-15) Once all services show running, then access web gui from another workstation, or if you installed a gui/desktop, access it from a web browser on that machine. I don't recommend a GUI. Build it CLI only and use a workstation to access the web GUI from. Here is the URL to start with. Default user/pass is admin/admin
+15) Once all services show running, then access web gui from another workstation, or if you installed a gui/desktop, access 
+it from a web browser on that machine. I don't recommend a GUI. Build it CLI only and use a workstation to access the web GUI 
+from. Here is the URL to start with. Default user/pass is admin/admin
+
 http://type IP address of server instead of this string:8980
 
 16) Go back to CLI. Run these commands.
+
 sudo apt-get install opennms-plugin-* -y
 sudo apt-get install opennms-webapp* -y
 
@@ -82,21 +95,26 @@ sudo apt-get install opennms-helm* -y
 grafana-cli plugins install opennms-helm-app
 
 21) Log into grafana web gui, or refresh with F5. You will have to enter a new admin password. default user/pass is admin/admin
+
 Here is URL again:  http://Type IP address of server here instead of string:3000
 
 22) Add the Postgresql data source in grafana GUI and connect to your postgresql database.
-Import the Postgresql dashboard in the GUI. Don't worry about the JSON box. Just put this number in the smaller box and import:  6048.
+
+Import the Postgresql dashboard in the GUI. Don't worry about the JSON box. 
+Just put this number in the smaller box and import:  6048.
 Now you have monitoring of your postgresql database that OpenNMS uses in grafana!
 
 23) Enable opennms-helm in the GUI, or at the command line.
 
 24) Restart grafana services
+
 sudo systemctl restart grafana-server
 
 25) Reboot server to see that everything comes up on boot, and talks to each other properly.
 
 26) Biggest issues you may run into: JAVA!!!!!
-You will have to google some of that, but here are some helpful java reference commands. Those are backticks in the third command, not single quotes.
+You will have to google some of that, but here are some helpful java reference commands. 
+Those are backticks in the third command, not single quotes.
 
 java -version
 which java
@@ -105,14 +123,20 @@ sudo update-alternatives --config java
 
 
 27) If you want to set java home manually, then do this.
+
 cd /etc/profile.d
 sudo nano java.sh
 
-28) Add this to the new and blank java.sh you have opened/created. Take a look at the helpful java reference commands in step 26) and see if what I have matches your installation. Save and close.
+28) Add this to the new and blank java.sh you have opened/created. Take a look at the helpful java reference commands in step 
+
+29) and see if what I have matches your installation. Save and close.
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 
-29) And finally, place ALL opennms package upgrades on HOLD. This is important, because once you start altering the default install in ANY way, the automated repo upgrades will break your installation.
-Here is commands for that. If some of the services are a little different, you can look to see what you are missing, but this next command should get it.
+30) And finally, place ALL opennms package upgrades on HOLD. This is important, because once you start altering the default install in ANY way, the automated repo upgrades will break your installation.
+
+Here is commands for that. If some of the services are a little different, 
+you can look to see what you are missing, but this next command should get it.
+
 sudo apt-mark hold opennms \
 	opennms-db \
 	opennms-server \
@@ -131,16 +155,16 @@ sudo apt-mark hold opennms \
 	opennms-plugins \
 	opennms-doc
 
-30) If the above command freaks out saying it can't find something, then remove that line from the command, re-paste and run, we can look for any new services and hold them next.
+31) If the above command freaks out saying it can't find something, then remove that line from the command, re-paste and run, we can look for any new services and hold them next.
 Whatever output this next command spits out, you'll be able to see which packages you haven't marked for hold status.
 
 sudo apt-cache search opennms
 
-31) Make sure tor didn't get installed.
+32) Make sure tor didn't get installed.
 
 sudo apt-get purge tor*
 
-32) Setup your IPtables rules. Here are the IPv4 rules.
+33) Setup your IPtables rules. Here are the IPv4 rules.
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 8980 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT
@@ -152,7 +176,7 @@ sudo apt-get purge tor*
 -A INPUT -s 127.0.0.1/32 -p udp -m udp --dport 10514 -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 
-33) You will also want to set a rule allow ssh so you can remote into the server, otherwise you'll kill your access beyond the webGUI. Use this command to find out the name of your interface and the network your server is on:  
+34) You will also want to set a rule allow ssh so you can remote into the server, otherwise you'll kill your access beyond the webGUI. Use this command to find out the name of your interface and the network your server is on:  
 
 ifconfig -a
 
@@ -161,14 +185,14 @@ Here is an example of an ssh inbound rule
 
 Change the network to whatever network your server is on, and change eno2 to whatever your interface is.
 
-34) Also in regards to your IPv4 rule base, be sure you change :INPUT ACCEPT to :INPUT DROP 
+35) Also in regards to your IPv4 rule base, be sure you change :INPUT ACCEPT to :INPUT DROP 
 
 Once you are certain your IPtables are setup correctly, set it up to start and run on boot.
 
 sudo systemctl start netfilter-persistent
 sudo systemctl enable netfilter-persistent
 
-35) Run this at the command line:  
+36) Run this at the command line:  
 
 netstat -tpn
 
@@ -188,7 +212,7 @@ Kill all packets arriving at or departing from the IP address shown in the examp
 
 tcpkill host 192.168.1.2 
 
-36) In closing, if you made it this far, then you are ready for the bigger stuff in the following notebooks on my github. Good luck and have fun with OpenNMS Horizon. I am.
+37) In closing, if you made it this far, then you are ready for the bigger stuff in the following notebooks on my github. Good luck and have fun with OpenNMS Horizon. I am.
 
 
 
