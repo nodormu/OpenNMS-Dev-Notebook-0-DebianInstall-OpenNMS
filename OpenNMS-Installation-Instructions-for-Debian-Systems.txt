@@ -127,12 +127,24 @@ sudo update-alternatives --config java
 cd /etc/profile.d
 sudo nano java.sh
 
-28) Add this to the new and blank java.sh you have opened/created. Take a look at the helpful java reference commands in step 
+Add this to the new and blank java.sh you have opened/created. 
+Take a look at the helpful java reference commands in the previous step 
+and see if what I have matches your installation. If not, change the path.
+Save and close file. You can run the script or reboot for it to take effect.
 
-29) and see if what I have matches your installation. Save and close.
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 
-30) And finally, place ALL opennms package upgrades on HOLD. This is important, because once you start altering the default install in ANY way, the automated repo upgrades will break your installation.
+While we are in the /etc/profile.d directory, let's set a script for your opennms home.
+
+sudo nano opennmshome.sh
+
+Your path should be /usr/share/opennms. It's not the /etc/opennms, or /opt/opennms location,
+as there will be sym links to those directories in the actual appliaction home path.
+In mine it's /usr/share/opennms, so my export path in the file is:
+
+export OPENNMS_HOME=/usr/share/opennms
+
+28) And finally, place ALL opennms package upgrades on HOLD. This is important, because once you start altering the default install in ANY way, the automated repo upgrades will break your installation.
 
 Here is commands for that. If some of the services are a little different, 
 you can look to see what you are missing, but this next command should get it.
@@ -155,16 +167,16 @@ sudo apt-mark hold opennms \
 	opennms-plugins \
 	opennms-doc
 
-31) If the above command freaks out saying it can't find something, then remove that line from the command, re-paste and run, we can look for any new services and hold them next.
+29) If the above command freaks out saying it can't find something, then remove that line from the command, re-paste and run, we can look for any new services and hold them next.
 Whatever output this next command spits out, you'll be able to see which packages you haven't marked for hold status.
 
 sudo apt-cache search opennms
 
-32) Make sure tor didn't get installed.
+30) Make sure tor didn't get installed.
 
 sudo apt-get purge tor*
 
-33) Setup your IPtables rules. Here are the IPv4 rules.
+31) Setup your IPtables rules. Here are the IPv4 rules.
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 8980 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT
@@ -176,7 +188,7 @@ sudo apt-get purge tor*
 -A INPUT -s 127.0.0.1/32 -p udp -m udp --dport 10514 -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 
-34) You will also want to set a rule allow ssh so you can remote into the server, otherwise you'll kill your access beyond the webGUI. Use this command to find out the name of your interface and the network your server is on:  
+32) You will also want to set a rule allow ssh so you can remote into the server, otherwise you'll kill your access beyond the webGUI. Use this command to find out the name of your interface and the network your server is on:  
 
 ifconfig -a
 
@@ -185,14 +197,13 @@ Here is an example of an ssh inbound rule
 
 Change the network to whatever network your server is on, and change eno2 to whatever your interface is.
 
-35) Also in regards to your IPv4 rule base, be sure you change :INPUT ACCEPT to :INPUT DROP 
-
+33) Also in regards to your IPv4 rule base, be sure you change :INPUT ACCEPT to :INPUT DROP 
 Once you are certain your IPtables are setup correctly, set it up to start and run on boot.
 
 sudo systemctl start netfilter-persistent
 sudo systemctl enable netfilter-persistent
 
-36) Run this at the command line:  
+34) Run this at the command line:  
 
 netstat -tpn
 
@@ -201,18 +212,19 @@ Do you see any outbound connections that you don't like or want. Install this pa
 sudo apt-get install dsniff
 
 The command in the dsniff package is:  tcpkill
-
 Google the command for the syntax. Here are a couple examples.
 
 Kill all outgoing traffic on port 21 (ftp). Don't forget to change the interface name eth0 to whatever your interface is.
 
 tcpkill -i eth0 port 21
 
-Kill all packets arriving at or departing from the IP address shown in the example. If you see suspicious traffic from a public IP, then tcpkill it.
+Kill all packets arriving at or departing from the IP address shown in the example. 
 
 tcpkill host 192.168.1.2 
 
-37) In closing, if you made it this far, then you are ready for the bigger stuff in the following notebooks on my github. Good luck and have fun with OpenNMS Horizon. I am.
+If you see suspicious traffic from a public IP, then tcpkill it.
+
+35) In closing, if you made it this far, then you are ready for the bigger stuff in the following notebooks on my github. Good luck and have fun with OpenNMS Horizon. I am.
 
 
 
