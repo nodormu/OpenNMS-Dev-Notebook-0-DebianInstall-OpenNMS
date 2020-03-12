@@ -26,7 +26,7 @@ sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y &
 sudo apt-get install syslog-ng* -y
 
 7) Install dependencies: (Defaults are fine. If some of these are outdated, then remove those from line, 
-paste edited command and run again.)
+paste edited command and run again. This command string is long and trails off screen.)
 
 sudo apt-get install iptables iptables-dev netfilter-persistent iptables-persistent smitools unzip clamav lm-sensors unzip snmp net-tools snmpd cmdtest golang libsnmp-dev apt-transport-* libdbi1 libdbd-mysql r-recommended devscripts dpkg-sig expect nsis babel-core* snmptrapd snmp-mibs-downloader rrdtool osm2pgsql php-bcmath nmap* clamav* rkhunter openjdk-11-* openjdk-11-jdk liboce-* libxext-doc -y moreutils -y default-jre* -y x509-util -y vnstat -y traceroute -y dom4j* -y java-se* -y xerces* -y zookeeper -y scala-library* -y libosgi-core-* libosgi-foundation-ee-java -y dnsutils -y bind9-host -y libdns* -y
 
