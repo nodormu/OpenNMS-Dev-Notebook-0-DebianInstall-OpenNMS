@@ -23,7 +23,7 @@ deb http://download.opensuse.org/repositories/home:/laszlo_budai:/syslog-ng/xUbu
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y
 
 6) If syslog-ng is not installed, install it.
-sudo apt-get install syslog-ng* -y
+sudo apt-get install syslog-ng-core -y
 
 7) Install dependencies: (Defaults are fine. If some of these are outdated, then remove those from line, 
 paste edited command and run again. This command string is long and trails off screen.)
